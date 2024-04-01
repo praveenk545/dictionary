@@ -1,0 +1,60 @@
+<p>crud works!</p>
+
+
+<div class="container row justify-content-center">
+    <form class="col-md-12" [formGroup]="Formvalue" (ngSubmit)="submit()">
+        <div class="Name row py-2 d-flex justify-content-center">
+            <div class="col-md-3">
+        <label>Name</label>
+        <input type="text" formControlName="name" placeholder="Name" class="form-control" [ngClass]="{'is-invalid':(Formvalue.controls.name.touched||isTry)&& Formvalue.controls.name.errors}"/>
+        <div class="invalid-feedback" *ngIf="(Formvalue.controls.name.touched||isTry)&&Formvalue.controls.name.errors">
+        <div *ngIf="Formvalue.controls.name.errors['required']">Name is required</div></div>
+    </div>
+    </div>
+
+    <div class="email row py-2 d-flex justify-content-center">
+        <div class="col-md-3">
+            <label>Email</label>
+            <input type="text" formControlName="email" placeholder="email" class="form-control" [ngClass]="{'is-invalid':(Formvalue.controls.email.touched||isTry)}">
+        </div>
+       
+    </div>
+    <div class="Password row py-2 d-flex justify-content-center">
+        <div class="col-md-3">
+        <label>Password</label>
+        <input type="text" formControlName="password" placeholder="Password" class="form-control">
+    </div>
+    </div>
+    <div class=" d-flex py-2 justify-content-center">
+        <button type="submit" class="btn btn-success fw-bold" *ngIf="!isButton">submit</button>
+        <button type="submit" class="btn btn-primary fw-bold" *ngIf="isButton" (click)="updateSave()">Save</button>
+        <!-- <button type="submit" *ngIf="isButton" class="btn btn-primary fw-bold" (click)="save()">Save</button> -->
+        <!-- <button type="submit" class="btn btn-success fw-bold" (click)="modified?updateSave():add()">{{modified?'Edit':'Submit'}}</button> -->
+    </div>
+    </form>
+</div>
+
+<!-- table -->
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Password</th>
+        <th scope="col">Update</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let v of addItems;let i=index">
+        <th scope="row">{{i+1}}</th>
+        <td>{{v['name']}}</td>
+        <td>{{v['email']}}</td>
+        <td>{{v['password']}}</td>
+        <td><button class="btn btn-primary fw-bold"(click)="update(v,i)">Edit</button></td>
+        <td><button class="btn btn-danger fw-bold"(click)="delete(i)">Delete</button></td>
+      </tr>
+
+    </tbody>
+  </table>

@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IPadressComponent } from './ipadress.component';
+import { CrudComponent } from './crud.component';
 
-describe('IPadressComponent', () => {
-  let component: IPadressComponent;
-  let fixture: ComponentFixture<IPadressComponent>;
+describe('CrudComponent', () => {
+  let component: CrudComponent;
+  let fixture: ComponentFixture<CrudComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [IPadressComponent]
+      declarations: [CrudComponent]
     });
-    fixture = TestBed.createComponent(IPadressComponent);
+    fixture = TestBed.createComponent(CrudComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,5 +1,5 @@
 <div class="container mt-3">
-    <div class="row">
+    <div class="row" >
         <div class="col-md-6-lg-6 d-flex justify-content-around">
 
             <fa-icon class="book icons " [icon]="icons.faBook"></fa-icon>
@@ -17,6 +17,11 @@
                 <span class="ms-3 text-secondary">|</span>
                 <fa-icon class="icons  ms-2" [icon]="icons.faSun" *ngIf="!theme" id="sun" (click)="start()"></fa-icon>
                 <fa-icon class="icons ms-2" [icon]="icons.faMoon" *ngIf="theme" id="moon" (click)="start()"></fa-icon>
+                <!-- for theme
+                    
+                    <div>
+                    <input type="checkbox" name="dark" [(ngModel)]="dark"/>
+                </div> -->
             </span>
 
 
@@ -41,14 +46,15 @@
 
             </form>
         </div>
-        <div *ngIf="dictData">
-            <div class="row mt-4 p-3" *ngFor="let d of dictData;let i = index">
+        <div>
+            <div class="row mt-4 p-3" *ngFor="let d of Data">
                 <div class="col-md-6-lg-6">
                     <div class="d-flex justify-content-around">
                         <!-- [(ngModel)]="d.meanings.partOfSpeech"
                         name="partOfSpeech" -->
-                        <span class="h2 fw-bold">{{d.word}}</span>
+                        <span class="h2 fw-bold"></span>
                         <audio controls>
+                            <source [src]="" type="audio/mpeg">
                             <source [src]="d.phonetics[0].audio" type="audio/mpeg">
                             Your browser does not support the audio tag.
                         </audio>
@@ -60,29 +66,46 @@
 
                 </div>
                 <div class="col-md-6-lg-6">
-                    <div *ngIf="dictData" class=" d-flex justify-content-center align-items-center mt-4">
-                        <span *ngFor="let d of dictData;let i = index" class="fw-bold text-dark h4"
-                            style="font-family: 'Lobster Two', sans-serif;">{{d.meanings['partOfSpeech']}}</span>
+                    <div class=" d-flex justify-content-center align-items-center mt-4">
+                        <span class="fw-bold text-dark h4"
+                                style="font-family: 'Lobster Two', sans-serif;">Noun</span>
+                            <!-- {{d.meanings['partOfSpeech']}} -->
 
                         <hr width="50%" class="ms-3">
 
 
                     </div>
-                    <div class="col-md-6-lg-8" *ngFor="let meaning of d.meanings">
+                    <div class="col-md-6-lg-8"  >
                         <div class="meaing d-flex justify-content-start">
-                            <span>Meaning</span>
+                            <span>Meaning </span>
+                            
+                            <div class="">
+                                <br>
+                               <p class="mt-2">{{d?.meanings[0].definitions[0].definition}}</p>
+                                <p class="mt-2">{{d?.meanings[0].definitions[1].definition}}</p>
+                                <p class="mt-2">{{d?.meanings[0].definitions[2].definition}}</p>
+                               <li class="ms-2"   style="text-decoration: none;" >partOfSpeech:{{d?.meanings[0].partOfSpeech}}</li>
+                              <div class="mt-2">
+                                <span>
+                                <p>Examples:</p>
+                                <p>{{d?.meanings[0].definitions[0].example}}</p>
+                                <p> {{d?.meanings[0].definitions[1].example}}</p>
+                                <p> {{d?.meanings[0].definitions[2].example}}</p>
+                            </span>
                         </div>
-                        <div class="mt-3">
-                            <div *ngIf="d.meanings" class="d-flex justify-content-center align-items-center">
-                                <ul class="list" style="font-family: 'IBM Plex Sans', sans-serif;font-size: 1.1rem;">
-                                    <li *ngFor="let def of meaning.definition"><br>{{def.example}}</li><br>
+                            </div>
+                        </div>
+                        <div class="mt-1">
+                            <!-- <div class="d-flex justify-content-start  align-items-center" >
+                                <ul class="list"  style="font-family: 'IBM Plex Sans', sans-serif;font-size: 1.1rem;text-decoration: none;">
+                                    <li class="ms-3" *ngFor="let d of Data;let i = index"  style="text-decoration: none;" >partOfSpeech:{{d?.meanings[1].partOfSpeech}}</li>
 
                                 </ul>
 
-                            </div>
+                            </div> -->
                             <div class="synonyms d-flex justify-content-start">
                                 <span>synonyms:</span>
-                                <span class="ms-3 fw-bold " style=" color: #a743f3;">dfdf</span>
+                                <span class="ms-3 fw-bold " style=" color: #a743f3;">{{d?.meanings[1].synonyms}}/{{d?.meanings[0].synonyms}}</span>
                             </div>
 
 
@@ -98,16 +121,39 @@
 
 
                         </div>
+                        <div class="d-flex justify-content-around">
+                             <p>partOfSpeech: {{d?.meanings[1].partOfSpeech}}</p>
+                            </div>
+                       
                         <div class="meaing">
                             <span>Meaning</span>
                         </div>
                         <!-- *ngFor="let item of dictData" -->
                         <div class="d-flex justify-content-center align-items-center">
                             <ul style="font-family: 'IBM Plex Sans', sans-serif;font-size: 1.1rem;">
-                                <li>when you master it you always got the lost laugh</li><br>
-                                <p>just binding the data </p>
+                                <li>{{d?.meanings[1].definitions[0].definition}}</li><br>
+                                <li>{{d?.meanings[1].definitions[1].definition}}</li><br>
+                                <li>{{d?.meanings[1].definitions[2].definition}}</li><br>
+                                <!-- <p>just binding the data </p> -->
+                             
                             </ul>
+                          
+                               
+                           
                         </div>
+                        <div class="myDiv" id="myDiv">
+                            <div class="meaing mb-2">
+                                Examples
+                            </div>
+                            <div class="meaing">
+                                  <p>{{d?.meanings[0].definitions[5].example}}</p>
+                            <p> {{d?.meanings[0].definitions[3].example}}</p>
+                            <p> {{d?.meanings[0].definitions[4].example}}</p>
+                            </div>
+                          
+                        
+                        </div>
+                     
                         <div class="d-flex justify-content-center align-items-center ">
                             <hr width="50%">
                         </div>

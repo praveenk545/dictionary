@@ -14,6 +14,7 @@ import { FormBuilder, FormGroup, FormControlName } from '@angular/forms';
 import { ApixuService } from './apixu.service';
 import { Pipe, PipeTransform } from '@angular/core';
 import * as _ from 'lodash';
+import { ThemeService } from './theme.service';
 
 @Pipe({
   name: 'removeduplicates',
@@ -34,11 +35,19 @@ export class RemovePipe implements PipeTransform {
 })
 export class DictionaryWebComponent implements OnInit {
   public dict: any;
-  public dictData: any;
+  public Data: any;
+
+  get dark() {
+    return this.themeService.theme === 'dark';
+  }
+
+  set dark(enabled: boolean) {
+    this.themeService.theme = enabled ? 'dark' : null;
+  }
 
   constructor(
     private formBuilder: FormBuilder,
-    private apixuService: ApixuService
+    private apixuService: ApixuService,private themeService: ThemeService
   ) {}
   theme: boolean = false;
 
@@ -48,11 +57,12 @@ export class DictionaryWebComponent implements OnInit {
   icons = { faBook, faSearch, faMicrophone, faPlay, faLink, faSun, faMoon };
 
   search() {}
+ 
 
   sendToAPIXU(formValues: any) {
-    this.apixuService.getvalues(formValues.location).subscribe((data) => {
-      this.dictData = data;
-      console.log('dictData', this.dictData);
+    this.apixuService.getvalues(formValues.location).subscribe((data:any) => {
+      this.Data = data;
+      console.log('dictData', this.Data);
     });
   }
   start() {
